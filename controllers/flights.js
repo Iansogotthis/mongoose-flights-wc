@@ -1,7 +1,8 @@
-const Flight = require('../models/flight');
+const Flight = require('../Models/flight');
 module.exports = {
     new: newFlight,
-    create
+    create,
+    index           
     };
 
 function newFlight(req, res) {
@@ -10,7 +11,26 @@ function newFlight(req, res) {
 
 function create(req, res) {
     const flight = new Flight(req.body);
-    flight.save();
-    res.redirect('/');
+    for(let key in req.body) {
+        if(req.body.date) delete req.body[key];
+    }
+    console.log(req.body)
+    flight.save()
+    function error(err) {
+        if (err) {
+            return res.render('flights/new');
+        }
+    console.log(flight);
+        res.redirect('/flights');
+    }
+}
 
+
+
+async function index(req, res) {
+    
+    const flights = await Flight.find({});
+    res.render('flights/index', { flights });
+
+    
 }
