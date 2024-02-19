@@ -5,25 +5,26 @@ module.exports = {
     index           
     };
 
-function newFlight(req, res) {
-    res.render('flights/new');
-}
 
-function create(req, res) {
+function newFlight(req,res) {
     const flight = new Flight(req.body);
-    function error(err) {
-        if (err) {
-            return res.render('flights/new');
-        }
-    flight.save()
-    
-    console.log(flight);
-        res.redirect('/flights');
-    }
+     console.log('departs', newFlight.departs)
+    const defaultDate = flight.departs.toISOString().slice(0, 16)
+    console.log(defaultDate)
+    res.render('flights/new', {defaultDate: defaultDate})
 }
 
+async function create(req, res){
+	console.log(req.body, " <- is the contents of our form!")
 
-
+	try {
+		const createdFlightDoc = await Flight.create(req.body)
+		res.redirect('/flights')
+	} catch(err){
+		console.log(err)
+		res.redirect('/flights/new')
+	}
+}
 async function index(req, res) {
     
     const flights = await Flight.find({});

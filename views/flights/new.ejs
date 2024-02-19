@@ -1,17 +1,19 @@
+
+
 <h2>Enter a New Flight</h2>
 <form action="/flights" method="POST">
   <label>Airline:
-    <input type="text" name="airline">
+    <input type="text" name="airline" placeholder="American"
   </label><br>
   <label>Airport:
-    <input type="text" name="airport">
+    <input type="text" name="airport"placeholder="ORD">
   </label><br>
   <label>Flight Number
-    <input type="text" name="flightNo">
+    <input type="text" name="flightNo"placeholder= "10">
   </label><br>
   <label>Depart Date:
-    <input type="date"
-             name="departs">
+    <input type="date" name="departs" placeholder="MM/DD/YYYY"
+    onfocus="(this.type='Date')">
   </label><br>
  
   <button type="submit">Add Itinerary</button>
