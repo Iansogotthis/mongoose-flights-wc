@@ -1,6 +1,17 @@
 const mongoose = require('mongoose');   // require mongoose
 const Schema = mongoose.Schema;         // require Schema
 
+const destinationSchema = new Schema({
+  airport: {
+    type: String,
+    enum: ['AUS', 'DFW', 'DEN', 'LAX', 'ORD', 'SAN'],
+    required: true
+  },
+  arrival: {
+    type: Date,
+    required: true
+  }
+});
 const flightSchema = new Schema({
   airline: {
     type: String,
@@ -27,8 +38,14 @@ const flightSchema = new Schema({
       return currentDate;
     },
     required: true
-  }
+  },
+    destinations : [destinationSchema]
 });
+
+
+
+
+
 
 // flightSchema.path('airline').validate((value) => {
 //   return ['American', 'Southwest', 'Delta'].includes(value);

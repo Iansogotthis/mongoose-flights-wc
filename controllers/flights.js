@@ -20,6 +20,7 @@ async function create(req, res){
 	try {
 		const createdFlightDoc = await Flight.create(req.body)
 		res.redirect('/flights')
+        movie.save()
 	} catch(err){
 		console.log(err)
 		res.redirect('/flights/new')
